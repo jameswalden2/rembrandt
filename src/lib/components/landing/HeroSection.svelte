@@ -18,47 +18,47 @@
 			rotation="-8deg"
 			opacity={0.3}
 			delay="0s"
-			title="notan"
+			title="Colour Reference"
 		/>
 		<FloatingBox
-			src="/den_gamle_by_painting_ref.jpg"
+			src="/hero_examples/heat_map_church_sm.png"
 			top="2%"
 			right="13%"
-			width="clamp(160px,18vw,280px)"
+			width="clamp(160px,18vw,320px)"
 			rotation="6deg"
 			opacity={0.1}
 			delay="0.15s"
-			title="notan"
+			title="Temperature Map"
 		/>
 		<FloatingBox
-			src="/den_gamle_by_painting_ref.jpg"
+			src="/hero_examples/notan_cortina_sm.png"
 			bottom="8%"
 			left="8%"
-			width="clamp(180px,22vw,340px)"
+			width="clamp(180px,22vw,260px)"
 			rotation="12deg"
 			opacity={0.12}
 			delay="0.3s"
-			title="notan"
+			title="Notan"
 		/>
 		<FloatingBox
-			src="/den_gamle_by_painting_ref.jpg"
-			top="35%"
-			right="2%"
-			width="clamp(200px,24vw,380px)"
+			src="/hero_examples/sobel_street_sm.png"
+			top="30%"
+			right="9%"
+			width="clamp(140px,24vw,240px)"
 			rotation="-5deg"
 			opacity={0.11}
 			delay="0.1s"
-			title="notan"
+			title="Sobel Edges"
 		/>
 		<FloatingBox
-			src="/den_gamle_by_painting_ref.jpg"
+			src="/hero_examples/value_reference_cows_sm.png"
 			bottom="4%"
 			right="14%"
-			width="clamp(160px,20vw,300px)"
+			width="clamp(160px,20vw,340px)"
 			rotation="9deg"
 			opacity={0.09}
 			delay="0.25s"
-			title="notan"
+			title="Grayscale"
 		/>
 	</div>
 
@@ -90,7 +90,7 @@
 	</div>
 
 	<!-- Eyebrow -->
-	<p class="mb-6 font-mono text-[10px] tracking-[0.4em] text-studio-amber uppercase">
+	<p class="mb-6 font-mono text-[1rem] tracking-[0.4em] text-studio-amber uppercase">
 		Rembrandt Studio
 	</p>
 

@@ -31,7 +31,9 @@
 	const cyclingWords: CyclingWord[] = [
 		{ label: 'a painter', color: '#e8a64a' },
 		{ label: 'Sargent', color: '#b8d4c8' },
-		{ label: 'Sorolla', color: '#d4a8c8' }
+		{ label: 'Bonheur', color: '#5ea197' },
+		{ label: 'Sorolla', color: '#d4a8c8' },
+		{ label: 'Rembrandt', color: '#d79128' }
 	];
 
 	const longestWord = cyclingWords.reduce((a, b) =>
@@ -94,7 +96,9 @@
 		vertical-align: middle;
 		overflow: hidden;
 		height: 1.1em;
-		transition: width 300ms 200ms ease-out, opacity 150ms ease-in-out;
+		transition:
+			width 300ms 200ms ease-out,
+			opacity 150ms ease-in-out;
 	}
 
 	.cycling-spacer {

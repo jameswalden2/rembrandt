@@ -10,7 +10,6 @@
 			<a href="https://github.com" class="transition-colors duration-200 hover:text-studio-amber"
 				>GitHub</a
 			>
-			<a href="#privacy" class="transition-colors duration-200 hover:text-studio-amber">Privacy</a>
 		</nav>
 	</div>
 </footer>

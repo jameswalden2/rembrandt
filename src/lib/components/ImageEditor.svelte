@@ -82,16 +82,6 @@
 	// Compare state
 	let showOriginal = $state(false);
 
-	const defaultSrc = '/den_gamle_by_painting_ref.jpg';
-	onMount(() => {
-		const img = new Image();
-		img.src = defaultSrc;
-		img.onload = () => {
-			originalImage = img;
-			console.log('Default image loaded', img.naturalWidth, img.naturalHeight);
-		};
-	});
-
 	const cropRatios: { value: string; label: string }[] = [
 		{ value: 'original', label: 'Original' },
 		{ value: '1:1', label: '1:1' },

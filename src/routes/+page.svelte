@@ -1,5 +1,6 @@
 <script lang="ts">
 	import FloatingBox from '$lib/components/FloatingBox.svelte';
+	import HeroHeadline from '$lib/components/HeroHeadline.svelte';
 
 	type VisualType =
 		| 'value-steps'
@@ -74,14 +75,6 @@
 		}
 	];
 </script>
-
-<svelte:head>
-	<title>Rembrandt — See your reference as a painter sees it</title>
-	<meta
-		name="description"
-		content="Real-time canvas filters for tone, colour, and form — all in your browser. No install, no account."
-	/>
-</svelte:head>
 
 <!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
 <section
@@ -174,11 +167,7 @@
 	</p>
 
 	<!-- Headline -->
-	<h1
-		class="mb-6 max-w-3xl font-heading text-7xl leading-[0.88] font-light tracking-tight text-studio-text-primary md:text-8xl"
-	>
-		See your reference<br />as a painter sees&nbsp;it
-	</h1>
+	<HeroHeadline />
 
 	<!-- Sub -->
 	<p class="mb-10 max-w-lg text-lg leading-relaxed font-light text-studio-text-secondary">

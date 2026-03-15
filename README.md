@@ -1,6 +1,6 @@
 # Rembrandt
 
-> *Reference photos are too detailed. Rembrandt strips them down to what your painting brain actually needs.*
+> _Reference photos are too detailed. Rembrandt strips them down to what your painting brain actually needs._
 
 A browser-based tool for artists. Upload a photo and apply real-time visual filters to simplify it for value studies, colour mixing, and sketching — no installation, no backend, everything runs in the browser.
 
@@ -52,14 +52,14 @@ A browser-based tool for artists. Upload a photo and apply real-time visual filt
 
 ## ⚙️ Tech Stack
 
-| Layer | Technology |
-|-------|------------|
+| Layer     | Technology                     |
+| --------- | ------------------------------ |
 | Framework | SvelteKit 2 + Svelte 5 (runes) |
-| Adapter | Static (no server) |
-| Language | TypeScript (strict) |
-| Styling | Tailwind CSS 4 |
-| Build | Vite 7 |
-| Testing | Vitest + Playwright |
+| Adapter   | Static (no server)             |
+| Language  | TypeScript (strict)            |
+| Styling   | Tailwind CSS 4                 |
+| Build     | Vite 7                         |
+| Testing   | Vitest + Playwright            |
 
 ## 🏗 Architecture
 

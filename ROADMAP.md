@@ -85,7 +85,7 @@ This file tracks what's been built, what's in progress, and what's worth buildin
 
 **Munsell Chroma Isolation** — isolates pixels above a user-set chroma threshold and renders everything below it as neutral grey. Helps painters identify where true colour (vs. neutral) exists in the reference, which is less obvious than it sounds in real-world scenes.
 
-**Colour Temperature Intensity Map** — an extension of the existing temperature overlay that maps the *degree* of warmth or coolness rather than just categorising warm/cool. Shows a gradient from deep cool to deep warm, helping painters make subtler temperature decisions in transitional passages.
+**Colour Temperature Intensity Map** — an extension of the existing temperature overlay that maps the _degree_ of warmth or coolness rather than just categorising warm/cool. Shows a gradient from deep cool to deep warm, helping painters make subtler temperature decisions in transitional passages.
 
 **Ambient Occlusion Approximation** — approximates soft contact shadows and concave shading using local contrast — the areas where light fails to reach because of nearby geometry. Rendered as a greyscale overlay. Useful for understanding shadow placement in complex still life or figure references.
 

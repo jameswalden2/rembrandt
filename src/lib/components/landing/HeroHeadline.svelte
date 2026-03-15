@@ -64,7 +64,7 @@
 >
 	See your reference<br />as
 	<span
-		class="cycling-host overflow-hidden"
+		class="cycling-host overflow-hidden opacity-85 hover:opacity-100"
 		aria-live="polite"
 		style={currentWidth ? `width: ${currentWidth}px` : undefined}
 	>
@@ -94,7 +94,7 @@
 		vertical-align: middle;
 		overflow: hidden;
 		height: 1.1em;
-		transition: width 300ms 200ms ease-out;
+		transition: width 300ms 200ms ease-out, opacity 150ms ease-in-out;
 	}
 
 	.cycling-spacer {

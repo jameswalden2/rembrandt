@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import FloatingBox from '$lib/components/FloatingBox.svelte';
 	import HeroHeadline from '$lib/components/HeroHeadline.svelte';
 
@@ -176,7 +177,7 @@
 
 	<!-- CTA -->
 	<a
-		href="/studio"
+		href={resolve('/studio')}
 		class="mb-16 inline-block rounded-full bg-studio-amber px-8 py-3.5 font-sans font-medium text-studio-deepest transition-colors duration-200 hover:bg-studio-amber-hover"
 	>
 		Open Studio →
@@ -216,7 +217,7 @@
 	</div>
 
 	<div class="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-		{#each features as feature, i}
+		{#each features as feature, i (feature.title)}
 			<div
 				class="fade-up-card overflow-hidden rounded-2xl border border-studio-border bg-studio-panel"
 				style="animation: fade-up 0.5s ease-out {i * 80}ms both;"
@@ -226,7 +227,7 @@
 					{#if feature.visualType === 'value-steps'}
 						<!-- 5 tonal steps -->
 						<div class="flex h-full w-full">
-							{#each ['#f0e8dd', '#c4b5a8', '#8a7d6e', '#4a4240', '#1a1714'] as shade}
+							{#each ['#f0e8dd', '#c4b5a8', '#8a7d6e', '#4a4240', '#1a1714'] as shade (shade)}
 								<div class="h-full flex-1" style="background:{shade};"></div>
 							{/each}
 						</div>
@@ -284,14 +285,14 @@
 					{:else if feature.visualType === 'colour-reduction'}
 						<!-- 8 artist colour swatches in 4×2 grid -->
 						<div class="grid h-full w-full grid-cols-4 grid-rows-2">
-							{#each ['#c4522a', '#e8743a', '#e8a64a', '#8a6040', '#2d5fa6', '#3a7a50', '#7b4a8e', '#1a1714'] as colour}
+							{#each ['#c4522a', '#e8743a', '#e8a64a', '#8a6040', '#2d5fa6', '#3a7a50', '#7b4a8e', '#1a1714'] as colour (colour)}
 								<div class="h-full w-full" style="background:{colour};"></div>
 							{/each}
 						</div>
 					{:else if feature.visualType === 'dominant-palette'}
 						<!-- 5 vertical colour bars with varying widths -->
 						<div class="flex h-full w-full items-end">
-							{#each [{ color: '#c4522a', pct: '32%' }, { color: '#e8a64a', pct: '24%' }, { color: '#2d5fa6', pct: '18%' }, { color: '#3a7a50', pct: '15%' }, { color: '#0f0d0b', pct: '11%' }] as bar}
+							{#each [{ color: '#c4522a', pct: '32%' }, { color: '#e8a64a', pct: '24%' }, { color: '#2d5fa6', pct: '18%' }, { color: '#3a7a50', pct: '15%' }, { color: '#0f0d0b', pct: '11%' }] as bar (bar.color)}
 								<div class="relative h-full" style="width:{bar.pct}; background:{bar.color};">
 									<span
 										class="absolute right-0 bottom-2 left-0 text-center font-mono text-[9px] text-white/60"
@@ -481,7 +482,7 @@
 			Ready to see differently?
 		</h2>
 		<a
-			href="/studio"
+			href={resolve('/studio')}
 			class="mb-8 inline-block rounded-full bg-studio-amber px-8 py-3.5 font-sans font-medium text-studio-deepest transition-colors duration-200 hover:bg-studio-amber-hover"
 		>
 			Open Studio →

@@ -1,51 +1,56 @@
 # Rembrandt
 
-A browser-based painting reference tool for artists. Upload a photo and apply real-time visual filters to simplify it for value studies, colour mixing, and sketching — no installation, no backend, everything runs in the browser.
+> *Reference photos are too detailed. Rembrandt strips them down to what your painting brain actually needs.*
 
-## Why
+A browser-based tool for artists. Upload a photo and apply real-time visual filters to simplify it for value studies, colour mixing, and sketching — no installation, no backend, everything runs in the browser.
 
-Reference photos are detailed and complex. Painters need to simplify them — to see large tonal masses, identify warm/cool temperature shifts, reduce a scene to its essential colours. Rembrandt transforms any photo into the format your painting brain needs.
-
-## Features
+## 🎨 Features
 
 ### Tone & Value
 
-| Filter | Description |
-|--------|-------------|
-| Grayscale | Standard luminance or artist-tuned channel weights |
-| Value Steps | Quantised tonal zones (2–10 shades) for simplified value studies |
-| Notan | Binary light/dark mass simplification |
-| Gaussian blur | Removes detail to reveal large value masses |
+**Grayscale** — standard luminance or artist-tuned channel weights.
+
+**Value Steps** — quantised tonal zones (2–10 shades) that force clarity about where each passage belongs in the value structure.
+
+**Notan** — binary light/dark mass simplification. Strips the composition down to its essential shapes.
+
+**Gaussian blur** — removes fine detail to reveal large value masses; the digital equivalent of squinting.
 
 ### Colour
 
-| Feature | Description |
-|---------|-------------|
-| Temperature map | Warm/cool hue analysis overlay |
-| Colour reduction | K-means quantization (2–32 colours) |
-| Colour picker | Click the canvas to sample any colour |
-| Dominant palette | Extracted colours with percentage coverage |
-| Colour harmony | Complementary and analogous relationships |
-| Light & shade analysis | Tonal profiles (Morning / Golden Hour / Overcast) |
+**Temperature map** — highlights warm pixels amber and cool pixels blue, supporting temperature contrast decisions at a glance.
+
+**Colour reduction** — K-means quantization (2–32 colours) shows the image as "big colour shapes."
+
+**Colour picker** — click anywhere on the canvas to sample a pixel's hex value.
+
+**Dominant palette** — extracted colours with percentage coverage, so you know what you're actually painting.
+
+**Colour harmony** — complementary and analogous relationships shown for any picked colour.
+
+**Light & shade analysis** — tonal profiles (Morning / Golden Hour / Overcast) for understanding the light in the reference.
 
 ### Edge & Form
 
-| Filter | Description |
-|--------|-------------|
-| Sobel edge detection | Adjustable threshold, optional pre-blur and invert |
+**Sobel edge detection** — adjustable threshold with optional pre-blur and invert. Shows hard vs. soft edges so you can decide which to sharpen or lose.
 
-### Tools
+### 🛠 Tools
 
-| Tool | Description |
-|------|-------------|
-| Crop | 10 aspect ratio presets |
-| Grid overlay | Configurable rows, columns, colour, and thickness |
-| Flip horizontal | Mirror the reference |
-| Compare view | Hold to reveal the original |
-| Fullscreen | Distraction-free view |
-| PNG download | Export the filtered image |
+**Crop** — 10 aspect ratio presets with drag-to-reposition.
 
-## Tech Stack
+**Grid overlay** — configurable rows, columns, colour, and thickness, overlaid on any view mode.
+
+**Composition overlays** — rule of thirds, golden ratio grid, golden spiral, and diagonal lines.
+
+**Flip horizontal** — mirrors the image instantly; useful for spotting problems you've gone blind to.
+
+**Compare view** — hold to reveal the original for quick before/after reference.
+
+**Fullscreen** — distraction-free view for detailed inspection.
+
+**PNG download** — export the filtered image.
+
+## ⚙️ Tech Stack
 
 | Layer | Technology |
 |-------|------------|
@@ -56,16 +61,17 @@ Reference photos are detailed and complex. Painters need to simplify them — to
 | Build | Vite 7 |
 | Testing | Vitest + Playwright |
 
-## Architecture
+## 🏗 Architecture
 
-- **Fully static** — no backend, no API calls; all processing runs in the browser via HTML Canvas
+All processing runs in the browser via HTML Canvas — no backend, no API calls.
+
 - **`ImageEditor.svelte`** owns the canvas, active filter state, and all settings panels
 - **`src/lib/imageProcessing/`** contains pure TypeScript modules for each filter (no DOM or Svelte dependencies)
 - **`kMeans.ts`** is shared by colour reduction (quantization filter) and dominant colour extraction (palette display)
 - **`canvasUtils.ts`** provides RGB↔HSL/Hex conversion helpers and DPI-aware canvas utilities
 - Svelte 5 runes (`$state`, `$derived`, `$effect`) throughout — no legacy reactive syntax
 
-## Getting Started
+## 🚀 Getting Started
 
 ```sh
 npm install

@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { applyGrayscale, ARTIST_WEIGHTS, STANDARD_WEIGHTS } from '$lib/imageProcessing/grayscale';
 	import { applyGrid } from '$lib/imageProcessing/grid';
+	import {
+		applyRuleOfThirds,
+		applyGoldenRatio,
+		applyGoldenSpiral,
+		applyDiagonalLines
+	} from '$lib/imageProcessing/composition';
 	import { applyReduceColours } from '$lib/imageProcessing/reduceColours';
 	import { applyNotan } from '$lib/imageProcessing/notan';
 	import { applySobel } from '$lib/imageProcessing/sobel';
@@ -51,6 +57,11 @@
 	let showGrid = $state(false);
 	let flipHorizontal = $state(false);
 	let grid = $state({ rows: 4, cols: 4, color: '#ffffff', thickness: 1 });
+	let showRuleOfThirds = $state(false);
+	let showGoldenRatio = $state(false);
+	let showGoldenSpiral = $state(false);
+	let showDiagonalLines = $state(false);
+	let composition = $state({ color: '#ffffff', thickness: 1 });
 	let colourCount = $state(8);
 	let isFullscreen = $state(false);
 	let canvasContainer = $state<HTMLDivElement | null>(null);
@@ -201,6 +212,10 @@
 		if (showGrid) {
 			applyGrid(ctx, grid);
 		}
+		if (showRuleOfThirds) applyRuleOfThirds(ctx, composition);
+		if (showGoldenRatio) applyGoldenRatio(ctx, composition);
+		if (showGoldenSpiral) applyGoldenSpiral(ctx, composition);
+		if (showDiagonalLines) applyDiagonalLines(ctx, composition);
 	}
 
 	function resetFilters() {
@@ -491,7 +506,16 @@
 			</div>
 
 			<!-- Canvas tools -->
-			<CanvasControls bind:showGrid bind:flipHorizontal bind:grid />
+			<CanvasControls
+				bind:showGrid
+				bind:flipHorizontal
+				bind:grid
+				bind:showRuleOfThirds
+				bind:showGoldenRatio
+				bind:showGoldenSpiral
+				bind:showDiagonalLines
+				bind:composition
+			/>
 		{:else}
 			<!-- No image hint -->
 			<div class="flex flex-1 items-center justify-center p-8">

@@ -39,6 +39,9 @@
 	).label;
 
 	let activeIndex = $state(0);
+	let wordWidths = $state<number[]>(new Array(cyclingWords.length).fill(0));
+	let hasWidths = $derived(wordWidths.every((w) => w > 0));
+	let currentWidth = $derived(hasWidths ? wordWidths[activeIndex] : null);
 
 	$effect(() => {
 		const id = setInterval(() => {
@@ -60,8 +63,19 @@
 	class="mb-6 max-w-3xl font-heading text-7xl leading-[1.1] font-light tracking-tight text-studio-text-primary md:text-8xl"
 >
 	See your reference<br />as
-	<span class="cycling-host overflow-hidden" aria-live="polite">
-		<span class="cycling-spacer" aria-hidden="true">{longestWord}</span>
+	<span
+		class="cycling-host overflow-hidden"
+		aria-live="polite"
+		style={currentWidth ? `width: ${currentWidth}px` : undefined}
+	>
+		{#if !hasWidths}
+			<span class="cycling-spacer" aria-hidden="true">{longestWord}</span>
+		{/if}
+		{#each cyclingWords as word, i (word.label)}
+			<span class="measure-word" aria-hidden="true" bind:offsetWidth={wordWidths[i]}
+				>{word.label}</span
+			>
+		{/each}
 		{#key activeIndex}
 			<span
 				class="cycling-word underline"
@@ -80,12 +94,20 @@
 		vertical-align: middle;
 		overflow: hidden;
 		height: 1.1em;
+		transition: width 300ms 200ms ease-out;
 	}
 
 	.cycling-spacer {
 		display: inline-block;
 		visibility: hidden;
 		white-space: nowrap;
+	}
+
+	.measure-word {
+		position: absolute;
+		visibility: hidden;
+		white-space: nowrap;
+		pointer-events: none;
 	}
 
 	.cycling-word {

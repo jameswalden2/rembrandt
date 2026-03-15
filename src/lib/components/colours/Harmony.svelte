@@ -47,11 +47,11 @@
 	</div>
 	<div class="flex items-center gap-2">
 		{#if harmonyMode === 'complementary'}
-			<ColourSwatch colour={pickedColour} size="lg" />
+			<ColourSwatch colour={pickedColour ?? undefined} size="lg" />
 			<ColourSwatch colour={complementColour} size="lg" />
 		{:else}
 			<ColourSwatch colour={analogousMinus} size="lg" />
-			<ColourSwatch colour={pickedColour} size="lg" />
+			<ColourSwatch colour={pickedColour ?? undefined} size="lg" />
 			<ColourSwatch colour={analogousPlus} size="lg" />
 		{/if}
 	</div>

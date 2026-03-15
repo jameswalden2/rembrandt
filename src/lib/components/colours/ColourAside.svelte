@@ -3,6 +3,7 @@
 	import { rgbToHsl } from '$lib/canvasUtils';
 	import IconEyedropper from '../icons/IconEyedropper.svelte';
 
+	import ColourWheel from './ColourWheel.svelte';
 	import Harmony from './Harmony.svelte';
 	import LightAndShade from './LightAndShade.svelte';
 	import DominantColourPalette from './DominantColourPalette.svelte';
@@ -101,6 +102,9 @@
 					style="background: linear-gradient(to right, #ffffff, {pickedColour.hex}, #000000);"
 				></div>
 			</div>
+
+			<!-- Colour Wheel section -->
+			<ColourWheel {pickedColour} />
 
 			<!-- Harmony section -->
 			<Harmony {pickedColour} />

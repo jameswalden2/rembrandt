@@ -33,8 +33,8 @@
 		},
 		overcast: {
 			name: 'Overcast',
-			highlight: { targetHue: 200, hueStrength: 0.15, lightnessShift: +0.2, saturationShift: -0.1 },
-			shadow: { targetHue: 210, hueStrength: 0.2, lightnessShift: -0.2, saturationShift: -0.15 }
+			highlight: { targetHue: 200, hueStrength: 0, lightnessShift: +0.2, saturationShift: -0.1 },
+			shadow: { targetHue: 210, hueStrength: 0, lightnessShift: -0.25, saturationShift: -0.2 }
 		}
 	};
 

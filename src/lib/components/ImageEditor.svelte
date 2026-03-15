@@ -19,8 +19,9 @@
 	import IconMinimize from '$lib/components/icons/IconMinimize.svelte';
 	import IconPaintbrush from '$lib/components/icons/IconPaintbrush.svelte';
 	import IconCompare from '$lib/components/icons/IconCompare.svelte';
-	import GridControls from './controls/GridControls.svelte';
+	import CanvasControls from './controls/CanvasControls.svelte';
 	import RangeControl from './controls/RangeControl.svelte';
+	import ToggleControl from './controls/ToggleControl.svelte';
 	import ButtonGroup from './buttons/ButtonGroup.svelte';
 	import IconButton from './buttons/IconButton.svelte';
 	import { onMount } from 'svelte';
@@ -49,10 +50,7 @@
 	let isDragging = $state(false);
 	let showGrid = $state(false);
 	let flipHorizontal = $state(false);
-	let gridRows = $state(4);
-	let gridCols = $state(4);
-	let gridColor = $state('#ffffff');
-	let gridThickness = $state(1);
+	let grid = $state({ rows: 4, cols: 4, color: '#ffffff', thickness: 1 });
 	let colourCount = $state(8);
 	let isFullscreen = $state(false);
 	let canvasContainer = $state<HTMLDivElement | null>(null);
@@ -201,12 +199,7 @@
 			applyTemperatureMap(ctx);
 		}
 		if (showGrid) {
-			applyGrid(ctx, {
-				rows: gridRows,
-				cols: gridCols,
-				color: gridColor,
-				thickness: gridThickness
-			});
+			applyGrid(ctx, grid);
 		}
 	}
 
@@ -400,7 +393,7 @@
 			<!-- View modes — grouped accordion -->
 			<div class="border-b border-studio-border p-4">
 				<div class="flex flex-col gap-3">
-					{#each viewModeGroups as group}
+					{#each viewModeGroups as group (group.label)}
 						<div>
 							<p
 								class="mb-1 text-[10px] font-medium tracking-widest text-studio-text-muted uppercase"
@@ -475,22 +468,7 @@
 													bind:value={sobelBlurRadius}
 													sidebar={true}
 												/>
-												<label class="flex cursor-pointer items-center gap-3">
-													<div class="relative">
-														<input
-															type="checkbox"
-															bind:checked={sobelInvert}
-															class="peer sr-only"
-														/>
-														<div
-															class="h-5 w-9 rounded-full bg-studio-elevated transition-colors peer-checked:bg-studio-amber"
-														></div>
-														<div
-															class="absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-white transition-transform peer-checked:translate-x-4"
-														></div>
-													</div>
-													<span class="text-sm font-medium text-studio-text-secondary">Invert</span>
-												</label>
+												<ToggleControl bind:checked={sobelInvert} label="Invert" />
 											</div>
 										{/if}
 										{#if mode.id === 'gaussianBlur'}
@@ -513,49 +491,7 @@
 			</div>
 
 			<!-- Canvas tools -->
-			<div class="border-b border-studio-border p-4">
-				<p class="mb-3 text-[10px] font-medium tracking-widest text-studio-text-muted uppercase">
-					Canvas
-				</p>
-				<div class="flex flex-col gap-2">
-					<label class="flex cursor-pointer items-center gap-3">
-						<div class="relative">
-							<input type="checkbox" bind:checked={showGrid} class="peer sr-only" />
-							<div
-								class="h-5 w-9 rounded-full bg-studio-elevated transition-colors peer-checked:bg-studio-amber"
-							></div>
-							<div
-								class="absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-white transition-transform peer-checked:translate-x-4"
-							></div>
-						</div>
-						<span class="text-sm font-medium text-studio-text-secondary">Grid Overlay</span>
-					</label>
-					{#if showGrid}
-						<div class="mt-1">
-							<GridControls
-								bind:gridRows
-								bind:gridCols
-								bind:gridColor
-								bind:gridThickness
-								sidebar={true}
-							/>
-						</div>
-					{/if}
-					<div class="border-t border-studio-border/50"></div>
-					<label class="flex cursor-pointer items-center gap-3">
-						<div class="relative">
-							<input type="checkbox" bind:checked={flipHorizontal} class="peer sr-only" />
-							<div
-								class="h-5 w-9 rounded-full bg-studio-elevated transition-colors peer-checked:bg-studio-amber"
-							></div>
-							<div
-								class="absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-white transition-transform peer-checked:translate-x-4"
-							></div>
-						</div>
-						<span class="text-sm font-medium text-studio-text-secondary">Flip Horizontal</span>
-					</label>
-				</div>
-			</div>
+			<CanvasControls bind:showGrid bind:flipHorizontal bind:grid />
 		{:else}
 			<!-- No image hint -->
 			<div class="flex flex-1 items-center justify-center p-8">
@@ -628,7 +564,7 @@
 		<!-- Canvas zone -->
 		<div
 			bind:this={canvasContainer}
-			class="relative flex flex-1 min-h-0 items-center justify-center bg-studio-deepest transition-colors duration-200 {isDragging
+			class="relative flex min-h-0 flex-1 items-center justify-center bg-studio-deepest transition-colors duration-200 {isDragging
 				? 'ring-2 ring-studio-amber ring-inset'
 				: ''}"
 			{ondrop}

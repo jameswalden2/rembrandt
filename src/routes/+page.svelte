@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import FeatureGrid from '$lib/components/landing/FeatureGrid.svelte';
+	import Footer from '$lib/components/landing/Footer.svelte';
 	import HeroSection from '$lib/components/landing/HeroSection.svelte';
 	import HowItWorks from '$lib/components/landing/HowItWorks.svelte';
 </script>
@@ -64,3 +65,5 @@
 		</p>
 	</div>
 </section>
+
+<Footer />

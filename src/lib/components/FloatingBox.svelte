@@ -82,7 +82,7 @@
 		/>
 	</div>
 	<span
-		class="mt-2 block text-center font-mono text-[10px] tracking-[0.4em] uppercase text-studio-amber transition-opacity duration-300"
-		style="opacity:{titleOpacity}"
-	>{title}</span>
+		class="mt-2 block text-center font-mono text-[10px] tracking-[0.4em] text-studio-amber uppercase transition-opacity duration-300"
+		style="opacity:{titleOpacity}">{title}</span
+	>
 </div>

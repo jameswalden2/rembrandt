@@ -23,8 +23,8 @@
 	import IconDownload from '$lib/components/icons/IconDownload.svelte';
 	import IconFullscreen from '$lib/components/icons/IconFullscreen.svelte';
 	import IconMinimize from '$lib/components/icons/IconMinimize.svelte';
-	import IconPaintbrush from '$lib/components/icons/IconPaintbrush.svelte';
 	import IconCompare from '$lib/components/icons/IconCompare.svelte';
+	import StudioBrand from '$lib/components/StudioBrand.svelte';
 	import CanvasControls from './controls/CanvasControls.svelte';
 	import RangeControl from './controls/RangeControl.svelte';
 	import ToggleControl from './controls/ToggleControl.svelte';
@@ -396,13 +396,7 @@
 	<aside
 		class="flex w-72 shrink-0 flex-col overflow-y-auto border-r border-studio-border bg-studio-panel"
 	>
-		<!-- Brand -->
-		<div class="flex items-center gap-2.5 border-b border-studio-border px-4 py-5">
-			<IconPaintbrush class="h-5 w-5 text-studio-amber" />
-			<span class="font-heading text-lg font-medium tracking-wide text-studio-text-primary"
-				>Rembrandt</span
-			>
-		</div>
+		<StudioBrand />
 
 		{#if originalImage}
 			<!-- View modes — grouped accordion -->

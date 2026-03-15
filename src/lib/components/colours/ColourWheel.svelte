@@ -78,10 +78,7 @@
 		Colour Wheel
 	</span>
 	<div class="flex justify-center {pickedColour ? '' : 'opacity-50'}">
-		<canvas
-			bind:this={canvasEl}
-			style="width: {SIZE}px; height: {SIZE}px;"
-			class="rounded-full"
+		<canvas bind:this={canvasEl} style="width: {SIZE}px; height: {SIZE}px;" class="rounded-full"
 		></canvas>
 	</div>
 </div>

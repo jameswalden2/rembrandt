@@ -24,10 +24,7 @@
 	import IconFullscreen from '$lib/components/icons/IconFullscreen.svelte';
 	import IconMinimize from '$lib/components/icons/IconMinimize.svelte';
 	import IconCompare from '$lib/components/icons/IconCompare.svelte';
-	import StudioBrand from '$lib/components/StudioBrand.svelte';
-	import CanvasControls from './controls/CanvasControls.svelte';
-	import RangeControl from './controls/RangeControl.svelte';
-	import ToggleControl from './controls/ToggleControl.svelte';
+	import FilterSidebar from './FilterSidebar.svelte';
 	import ButtonGroup from './buttons/ButtonGroup.svelte';
 	import IconButton from './buttons/IconButton.svelte';
 	import { onMount } from 'svelte';
@@ -245,48 +242,6 @@
 		dominantColours = extractDominantColours(imageData, 5);
 	});
 
-	const viewModeGroups: {
-		label: string;
-		modes: { id: typeof viewMode; label: string; description: string }[];
-	}[] = [
-		{
-			label: 'Tone & Value',
-			modes: [
-				{ id: 'normal', label: 'Normal', description: 'Unmodified reference' },
-				{ id: 'grayscale', label: 'Grayscale', description: 'Standard luminance' },
-				{
-					id: 'artistGrayscale',
-					label: 'Artist Grayscale',
-					description: 'Warm-biased for painting'
-				},
-				{
-					id: 'grayscaleReduceColours',
-					label: 'Value Steps',
-					description: 'Quantised tonal zones'
-				},
-				{ id: 'notan', label: 'Notan', description: 'Light/dark masses' }
-			]
-		},
-		{
-			label: 'Colour',
-			modes: [
-				{
-					id: 'reduceColours',
-					label: 'Reduce Colours',
-					description: 'K-means colour simplification'
-				},
-				{ id: 'temperatureMap', label: 'Temperature Map', description: 'Warm/cool hue analysis' }
-			]
-		},
-		{
-			label: 'Edge & Form',
-			modes: [
-				{ id: 'sobel', label: 'Sobel Edges', description: 'Edge detection' },
-				{ id: 'gaussianBlur', label: 'Gaussian Blur', description: 'Soften to read masses' }
-			]
-		}
-	];
-
 	$effect(() => {
 		if (!canvas || !originalImage) return;
 		const ctx = canvas.getContext('2d', { willReadFrequently: true });
@@ -383,132 +338,25 @@
 
 <div class="flex h-screen overflow-hidden font-sans">
 	<!-- Sidebar -->
-	<aside
-		class="flex w-72 shrink-0 flex-col overflow-y-auto border-r border-studio-border bg-studio-panel"
-	>
-		<StudioBrand />
-
-		{#if originalImage}
-			<!-- View modes — grouped accordion -->
-			<div class="border-b border-studio-border p-4">
-				<div class="flex flex-col gap-3">
-					{#each viewModeGroups as group (group.label)}
-						<div>
-							<p
-								class="mb-1 text-[10px] font-medium tracking-widest text-studio-text-muted uppercase"
-							>
-								{group.label}
-							</p>
-							<div class="flex flex-col gap-0.5">
-								{#each group.modes as mode (mode.id)}
-									<button
-										onclick={() => (viewMode = mode.id)}
-										class="flex flex-col rounded-sm border-l-4 px-3 py-2 text-left transition-colors {viewMode ===
-										mode.id
-											? 'border-studio-amber bg-studio-elevated'
-											: 'border-transparent hover:bg-studio-elevated hover:text-studio-text-primary'}"
-									>
-										<span
-											class="text-sm font-medium {viewMode === mode.id
-												? 'text-studio-text-primary'
-												: 'text-studio-text-secondary'}">{mode.label}</span
-										>
-										<span class="text-[11px] text-studio-text-muted">{mode.description}</span>
-									</button>
-
-									<!-- Inline controls for active mode -->
-									{#if viewMode === mode.id}
-										{#if mode.id === 'reduceColours'}
-											<div class="mt-1 mb-1 px-3">
-												<RangeControl
-													label="Colours"
-													min={2}
-													max={32}
-													bind:value={colourCount}
-													sidebar={true}
-												/>
-											</div>
-										{/if}
-										{#if mode.id === 'grayscaleReduceColours'}
-											<div class="mt-1 mb-1 px-3">
-												<RangeControl
-													label="Shades"
-													min={2}
-													max={10}
-													bind:value={grayscaleShades}
-													sidebar={true}
-												/>
-											</div>
-										{/if}
-										{#if mode.id === 'notan'}
-											<div class="mt-1 mb-1 px-3">
-												<RangeControl
-													label="Threshold"
-													min={0}
-													max={255}
-													bind:value={notanThreshold}
-													sidebar={true}
-												/>
-											</div>
-										{/if}
-										{#if mode.id === 'sobel'}
-											<div class="mt-1 mb-1 flex flex-col gap-3 px-3">
-												<RangeControl
-													label="Threshold"
-													min={0}
-													max={255}
-													bind:value={sobelThreshold}
-													sidebar={true}
-												/>
-												<RangeControl
-													label="Pre-blur"
-													min={0}
-													max={5}
-													bind:value={sobelBlurRadius}
-													sidebar={true}
-												/>
-												<ToggleControl bind:checked={sobelInvert} label="Invert" />
-											</div>
-										{/if}
-										{#if mode.id === 'gaussianBlur'}
-											<div class="mt-1 mb-1 px-3">
-												<RangeControl
-													label="Blur Radius"
-													min={0}
-													max={40}
-													bind:value={blurRadius}
-													sidebar={true}
-												/>
-											</div>
-										{/if}
-									{/if}
-								{/each}
-							</div>
-						</div>
-					{/each}
-				</div>
-			</div>
-
-			<!-- Canvas tools -->
-			<CanvasControls
-				bind:showGrid
-				bind:flipHorizontal
-				bind:grid
-				bind:showRuleOfThirds
-				bind:showGoldenRatio
-				bind:showGoldenSpiral
-				bind:showDiagonalLines
-				bind:composition
-			/>
-		{:else}
-			<!-- No image hint -->
-			<div class="flex flex-1 items-center justify-center p-8">
-				<p class="text-center font-heading text-xl leading-relaxed text-studio-text-muted">
-					Load a reference<br />to begin
-				</p>
-			</div>
-		{/if}
-	</aside>
+	<FilterSidebar
+		{originalImage}
+		bind:viewMode
+		bind:colourCount
+		bind:grayscaleShades
+		bind:notanThreshold
+		bind:sobelThreshold
+		bind:sobelBlurRadius
+		bind:sobelInvert
+		bind:blurRadius
+		bind:showGrid
+		bind:flipHorizontal
+		bind:grid
+		bind:showRuleOfThirds
+		bind:showGoldenRatio
+		bind:showGoldenSpiral
+		bind:showDiagonalLines
+		bind:composition
+	/>
 
 	<!-- Main area -->
 	<main class="flex min-w-0 flex-1 flex-col">

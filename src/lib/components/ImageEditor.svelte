@@ -27,7 +27,6 @@
 	import FilterSidebar from './FilterSidebar.svelte';
 	import ButtonGroup from './buttons/ButtonGroup.svelte';
 	import IconButton from './buttons/IconButton.svelte';
-	import { onMount } from 'svelte';
 	import ColourAside from './colours/ColourAside.svelte';
 
 	let originalImage = $state<HTMLImageElement | null>();

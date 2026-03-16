@@ -7,8 +7,9 @@
 			class="mt-3 flex justify-center gap-6 font-mono text-[10px] tracking-widest text-studio-text-muted uppercase"
 		>
 			<!-- TODO: replace with real GitHub repo URL -->
-			<a href="https://github.com" class="transition-colors duration-200 hover:text-studio-amber"
-				>GitHub</a
+			<a
+				href="https://github.com/jameswalden2/rembrandt"
+				class="transition-colors duration-200 hover:text-studio-amber">GitHub</a
 			>
 		</nav>
 	</div>

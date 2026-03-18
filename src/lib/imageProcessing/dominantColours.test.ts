@@ -30,7 +30,7 @@ describe('extractDominantColours', () => {
 		// 16x1 pixels with two colours; sample every 4th = 4 samples at pixels 0,4,8,12
 		const pixels: [number, number, number, number][] = [
 			...Array(8).fill([255, 0, 0, 255]),
-			...Array(8).fill([0, 0, 255, 255]),
+			...Array(8).fill([0, 0, 255, 255])
 		];
 		const imageData = makeImageData(pixels, 16);
 		const result = extractDominantColours(imageData, 2);
@@ -56,7 +56,7 @@ describe('extractDominantColours', () => {
 			[0, 0, 255, 255], // pixel 12 — sampled
 			[0, 0, 255, 255],
 			[0, 0, 255, 255],
-			[0, 0, 255, 255],
+			[0, 0, 255, 255]
 		];
 		const imageData = makeImageData(pixels, 16);
 		const result = extractDominantColours(imageData, 2);

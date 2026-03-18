@@ -17,7 +17,7 @@ describe('applyReduceColours', () => {
 		// 16x1: first 8 red, last 8 blue
 		const pixels: [number, number, number, number][] = [
 			...Array(8).fill([255, 0, 0, 255]),
-			...Array(8).fill([0, 0, 255, 255]),
+			...Array(8).fill([0, 0, 255, 255])
 		];
 		const ctx = createMockCtx(16, 1, makePixels(pixels));
 		applyReduceColours(ctx, 2);

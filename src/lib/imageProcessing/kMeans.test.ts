@@ -7,12 +7,19 @@ describe('nearestCentroid', () => {
 	});
 
 	it('returns the index of the closest centroid', () => {
-		const centroids: [number, number, number][] = [[0, 0, 0], [200, 200, 200], [100, 100, 100]];
+		const centroids: [number, number, number][] = [
+			[0, 0, 0],
+			[200, 200, 200],
+			[100, 100, 100]
+		];
 		expect(nearestCentroid(110, 110, 110, centroids)).toBe(2);
 	});
 
 	it('returns the first match when distances are equal (uses strict <)', () => {
-		const centroids: [number, number, number][] = [[100, 0, 0], [0, 100, 0]];
+		const centroids: [number, number, number][] = [
+			[100, 0, 0],
+			[0, 100, 0]
+		];
 		// Both are distance 10000 from [0,0,0] — first wins because strict < doesn't update on tie
 		// Equidistant from origin: favour index 0
 		expect(nearestCentroid(0, 0, 0, centroids)).toBe(0);
@@ -31,10 +38,7 @@ describe('runKMeans', () => {
 	});
 
 	it('separates two clearly distinct clusters with k=2', () => {
-		const samples = [
-			...Array(50).fill(RED),
-			...Array(50).fill(BLUE),
-		] as [number, number, number][];
+		const samples = [...Array(50).fill(RED), ...Array(50).fill(BLUE)] as [number, number, number][];
 		const { centroids } = runKMeans(samples, 2);
 		const sorted = [...centroids].sort((a, b) => a[0] - b[0]);
 		expect(sorted[0][2]).toBeGreaterThan(200); // blue centroid
@@ -52,10 +56,11 @@ describe('runKMeans', () => {
 
 	describe('withCounts: true', () => {
 		it('returns counts summing to total number of samples', () => {
-			const samples = [
-				...Array(50).fill(RED),
-				...Array(50).fill(BLUE),
-			] as [number, number, number][];
+			const samples = [...Array(50).fill(RED), ...Array(50).fill(BLUE)] as [
+				number,
+				number,
+				number
+			][];
 			const { counts } = runKMeans(samples, 2, true);
 			expect(counts[0] + counts[1]).toBe(100);
 		});
@@ -68,7 +73,11 @@ describe('runKMeans', () => {
 		});
 
 		it('counts array length equals k', () => {
-			const samples = [...Array(30).fill(RED), ...Array(30).fill(BLUE)] as [number, number, number][];
+			const samples = [...Array(30).fill(RED), ...Array(30).fill(BLUE)] as [
+				number,
+				number,
+				number
+			][];
 			const { counts } = runKMeans(samples, 2, true);
 			expect(counts).toHaveLength(2);
 		});

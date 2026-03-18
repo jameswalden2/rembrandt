@@ -6,9 +6,7 @@ const defaultOpts = { threshold: 0, invert: false, blurRadius: 0 };
 
 describe('applySobel', () => {
 	it('uniform image produces no edges (all magnitude 0)', () => {
-		const pixels: [number, number, number, number][] = Array(25).fill([
-			128, 128, 128, 255
-		]);
+		const pixels: [number, number, number, number][] = Array(25).fill([128, 128, 128, 255]);
 		const ctx = createMockCtx(5, 5, makePixels(pixels));
 		applySobel(ctx, defaultOpts);
 		const out = getCapturedPixels(ctx);
@@ -19,9 +17,7 @@ describe('applySobel', () => {
 
 	it('border pixels always output 0 magnitude', () => {
 		// 3x3 with bright center pixel — only center is interior; all 8 borders → 0
-		const pixels: [number, number, number, number][] = Array(9).fill([
-			0, 0, 0, 255
-		]);
+		const pixels: [number, number, number, number][] = Array(9).fill([0, 0, 0, 255]);
 		pixels[4] = [255, 255, 255, 255]; // center
 		const ctx = createMockCtx(3, 3, makePixels(pixels));
 		applySobel(ctx, defaultOpts);
@@ -39,9 +35,7 @@ describe('applySobel', () => {
 			.fill(null)
 			.map((_, i) => {
 				const col = i % 5;
-				return col < 2
-					? [255, 255, 255, 255]
-					: [0, 0, 0, 255];
+				return col < 2 ? [255, 255, 255, 255] : [0, 0, 0, 255];
 			}) as [number, number, number, number][];
 		const ctx = createMockCtx(5, 5, makePixels(pixels));
 		applySobel(ctx, defaultOpts);
@@ -57,9 +51,7 @@ describe('applySobel', () => {
 			.fill(null)
 			.map((_, i) => {
 				const col = i % 5;
-				return col < 2
-					? [255, 255, 255, 255]
-					: [0, 0, 0, 255];
+				return col < 2 ? [255, 255, 255, 255] : [0, 0, 0, 255];
 			}) as [number, number, number, number][];
 		const ctx = createMockCtx(5, 5, makePixels(pixels));
 		applySobel(ctx, { threshold: 300, invert: false, blurRadius: 0 });
@@ -71,9 +63,7 @@ describe('applySobel', () => {
 
 	it('invert=true maps 0→255 for non-edge pixels', () => {
 		// Uniform image: all magnitudes are 0. With invert: 255 - 0 = 255
-		const pixels: [number, number, number, number][] = Array(25).fill([
-			128, 128, 128, 255
-		]);
+		const pixels: [number, number, number, number][] = Array(25).fill([128, 128, 128, 255]);
 		const ctx = createMockCtx(5, 5, makePixels(pixels));
 		applySobel(ctx, { threshold: 0, invert: true, blurRadius: 0 });
 		const out = getCapturedPixels(ctx);
@@ -83,9 +73,7 @@ describe('applySobel', () => {
 	});
 
 	it('does not write alpha channel', () => {
-		const pixels: [number, number, number, number][] = Array(25).fill([
-			128, 128, 128, 200
-		]);
+		const pixels: [number, number, number, number][] = Array(25).fill([128, 128, 128, 200]);
 		const ctx = createMockCtx(5, 5, makePixels(pixels));
 		applySobel(ctx, defaultOpts);
 		const out = getCapturedPixels(ctx);
@@ -99,9 +87,7 @@ describe('applySobel', () => {
 			.fill(null)
 			.map((_, i) => {
 				const col = i % 7;
-				return col < 3
-					? [255, 255, 255, 255]
-					: [0, 0, 0, 255];
+				return col < 3 ? [255, 255, 255, 255] : [0, 0, 0, 255];
 			}) as [number, number, number, number][];
 		const ctxSharp = createMockCtx(7, 7, makePixels(pixels));
 		const ctxBlur = createMockCtx(7, 7, makePixels(pixels));

@@ -52,10 +52,17 @@ describe('applyNotan', () => {
 	});
 
 	it('handles two pixels independently', () => {
-		const ctx = createMockCtx(2, 1, makePixels([[255, 255, 255, 255], [0, 0, 0, 255]]));
+		const ctx = createMockCtx(
+			2,
+			1,
+			makePixels([
+				[255, 255, 255, 255],
+				[0, 0, 0, 255]
+			])
+		);
 		applyNotan(ctx, 128);
 		const out = getCapturedPixels(ctx);
 		expect(out[0]).toBe(255); // white
-		expect(out[4]).toBe(0);   // black
+		expect(out[4]).toBe(0); // black
 	});
 });

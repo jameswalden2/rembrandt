@@ -57,11 +57,18 @@ describe('applyGrayscale', () => {
 	});
 
 	it('processes multiple pixels independently', () => {
-		const ctx = createMockCtx(2, 1, makePixels([[255, 0, 0, 255], [0, 0, 0, 255]]));
+		const ctx = createMockCtx(
+			2,
+			1,
+			makePixels([
+				[255, 0, 0, 255],
+				[0, 0, 0, 255]
+			])
+		);
 		applyGrayscale(ctx);
 		const out = getCapturedPixels(ctx);
 		expect(out[0]).toBe(76); // red pixel
-		expect(out[4]).toBe(0);  // black pixel stays black
+		expect(out[4]).toBe(0); // black pixel stays black
 	});
 
 	it('quantises with numShades=2', () => {
@@ -84,7 +91,10 @@ describe('applyGrayscale', () => {
 	it('calls getImageData and putImageData once', () => {
 		const ctx = createMockCtx(1, 1);
 		applyGrayscale(ctx);
-		const mock = ctx as unknown as { getImageData: { mock: { calls: unknown[] } }; putImageData: { mock: { calls: unknown[] } } };
+		const mock = ctx as unknown as {
+			getImageData: { mock: { calls: unknown[] } };
+			putImageData: { mock: { calls: unknown[] } };
+		};
 		expect(mock.getImageData.mock.calls).toHaveLength(1);
 		expect(mock.putImageData.mock.calls).toHaveLength(1);
 	});

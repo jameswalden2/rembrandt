@@ -18,7 +18,7 @@ export function createMockCtx(width: number, height: number, initialPixels?: Uin
 		getImageData: vi.fn(() => ({
 			data: new Uint8ClampedArray(data),
 			width,
-			height,
+			height
 		})),
 		putImageData: vi.fn(),
 		beginPath: vi.fn(),
@@ -35,13 +35,11 @@ export function createMockCtx(width: number, height: number, initialPixels?: Uin
 		drawImage: vi.fn(),
 		strokeStyle: '',
 		lineWidth: 0,
-		filter: '',
+		filter: ''
 	} as unknown as CanvasRenderingContext2D;
 }
 
-export function getCapturedPixels(
-	mockCtx: ReturnType<typeof createMockCtx>
-): Uint8ClampedArray {
+export function getCapturedPixels(mockCtx: ReturnType<typeof createMockCtx>): Uint8ClampedArray {
 	const mock = mockCtx as unknown as { putImageData: ReturnType<typeof vi.fn> };
 	return mock.putImageData.mock.calls[0][0].data as Uint8ClampedArray;
 }

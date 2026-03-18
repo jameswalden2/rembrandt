@@ -3,7 +3,7 @@ import {
 	applyDiagonalLines,
 	applyGoldenRatio,
 	applyGoldenSpiral,
-	applyRuleOfThirds,
+	applyRuleOfThirds
 } from './composition';
 import { createMockCtx } from './testUtils';
 
@@ -54,7 +54,7 @@ describe('applyGoldenRatio', () => {
 		// [2]: vertical frac=1/PHI → ~618.03
 		// [3]: horizontal frac=1/PHI → (0, ~618.03)
 		const pos1 = 1000 * (1 - 1 / PHI); // ~381.97
-		const pos2 = 1000 / PHI;            // ~618.03
+		const pos2 = 1000 / PHI; // ~618.03
 		expect(coords[0][0]).toBeCloseTo(pos1, 2);
 		expect(coords[2][0]).toBeCloseTo(pos2, 2);
 	});

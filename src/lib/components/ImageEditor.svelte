@@ -17,16 +17,9 @@
 		type DominantColour
 	} from '$lib/imageProcessing/dominantColours';
 	import { computeCropRect, drawCropOverlay } from '$lib/imageProcessing/crop';
-	import { getCanvasPos, downloadImage, rgbToHex } from '$lib/canvasUtils';
-	import IconCrop from '$lib/components/icons/IconCrop.svelte';
-	import IconUpload from '$lib/components/icons/IconUpload.svelte';
-	import IconDownload from '$lib/components/icons/IconDownload.svelte';
-	import IconFullscreen from '$lib/components/icons/IconFullscreen.svelte';
-	import IconMinimize from '$lib/components/icons/IconMinimize.svelte';
-	import IconCompare from '$lib/components/icons/IconCompare.svelte';
+	import { getCanvasPos, rgbToHex } from '$lib/canvasUtils';
 	import FilterSidebar from './FilterSidebar.svelte';
-	import ButtonGroup from './buttons/ButtonGroup.svelte';
-	import IconButton from './buttons/IconButton.svelte';
+	import TopToolbar from './TopToolbar.svelte';
 	import ColourAside from './colours/ColourAside.svelte';
 	import DropZonePlaceholder from './DropZonePlaceholder.svelte';
 
@@ -78,6 +71,9 @@
 
 	// Compare state
 	let showOriginal = $state(false);
+
+	// Title state
+	let imageName = $state('');
 
 	const cropRatios: { value: string; label: string }[] = [
 		{ value: 'original', label: 'Original' },
@@ -302,6 +298,7 @@
 	}
 
 	function loadFile(file: File) {
+		imageName = file.name.replace(/\.[^.]+$/, '');
 		const reader = new FileReader();
 		reader.onload = (event) => {
 			const img = new Image();
@@ -362,59 +359,17 @@
 	<main class="flex min-w-0 flex-1 flex-col">
 		<!-- Top toolbar (only when image loaded) -->
 		{#if originalImage}
-			<div class="flex items-center gap-2 border-b border-studio-border bg-studio-panel px-4 py-2">
-				<!-- Edit actions -->
-				<ButtonGroup>
-					<IconButton title="Crop" onclick={enterCropMode} active={isCropMode}>
-						<IconCrop class="h-4 w-4" />
-						Crop
-					</IconButton>
-					<IconButton
-						title="Hold to see original"
-						onmousedown={() => (showOriginal = true)}
-						onmouseup={() => (showOriginal = false)}
-						onmouseleave={() => (showOriginal = false)}
-						active={showOriginal}
-						disabled={isCropMode}
-					>
-						<IconCompare class="h-4 w-4" />
-						Compare <span class="text-muted text-xs">(hold)</span>
-					</IconButton>
-					<IconButton title="Reset filters" onclick={resetFilters}>Reset</IconButton>
-				</ButtonGroup>
-
-				<!-- Visual divider -->
-				<div class="h-6 w-px bg-studio-border" aria-hidden="true"></div>
-
-				<!-- File / View actions -->
-				<ButtonGroup>
-					<label
-						class="flex cursor-pointer items-center gap-2 rounded-md border border-transparent px-3 py-1.5 text-sm font-medium text-studio-text-secondary transition-colors hover:border-studio-border hover:bg-studio-elevated hover:text-studio-text-primary"
-					>
-						<IconUpload class="h-4 w-4" />
-						Replace
-						<input type="file" accept="image/*" onchange={handleFileChange} class="hidden" />
-					</label>
-					<IconButton
-						title="Download PNG"
-						onclick={() => {
-							if (canvas) downloadImage(canvas);
-						}}
-					>
-						<IconDownload class="h-4 w-4" />
-						Download
-					</IconButton>
-					<IconButton onclick={toggleFullscreen} title="Fullscreen (Esc to exit)">
-						{#if isFullscreen}
-							<IconMinimize class="h-4 w-4" />
-							Exit Fullscreen
-						{:else}
-							<IconFullscreen class="h-4 w-4" />
-							Fullscreen
-						{/if}
-					</IconButton>
-				</ButtonGroup>
-			</div>
+			<TopToolbar
+				bind:imageName
+				{isCropMode}
+				bind:showOriginal
+				{isFullscreen}
+				{canvas}
+				onenterCropMode={enterCropMode}
+				onresetFilters={resetFilters}
+				ontoggleFullscreen={toggleFullscreen}
+				onfileChange={handleFileChange}
+			/>
 		{/if}
 
 		<!-- Canvas zone -->

@@ -53,9 +53,9 @@ export function getCanvasPos(e: MouseEvent, canvas: HTMLCanvasElement): { x: num
 	};
 }
 
-export function downloadImage(canvas: HTMLCanvasElement): void {
+export function downloadImage(canvas: HTMLCanvasElement, filename = 'painting'): void {
 	const link = document.createElement('a');
-	link.download = 'painting.png';
+	link.download = `${filename}.png`;
 	link.href = canvas.toDataURL('image/png');
 	link.click();
 }
